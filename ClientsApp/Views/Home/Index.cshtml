@@ -1,0 +1,41 @@
+﻿@model List<ClientsApp.Models.Client>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Clients</h1>  
+</div>
+
+
+<form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Import">
+    <button name="button" value="import" class="btn btn-success">Import clients</button>
+</form>
+<div>
+    @TempData["errormsg"]
+</div>
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>PostCode</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>@item.ClientId</td>
+                <td>@item.Name</td>
+                <td>@item.Address</td>
+                <td>@item.PostCode</td>
+                <td><a asp-controller="Home" asp-action="Edit" asp-route-id="@item.ClientId">Update</a></td>  
+            </tr>
+            }
+        </tbody>
+    </table>
+
+
